@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="600" src="https://github.com/SuperNova-Network/SuperNova/blob/main/public/resources/media/images/Title.png?raw=true" alt="SuperNova" />
+  <img width="600" src="https://github.com/SuperNova-Network/SuperNova/blob/main/public/media/Title.png?raw=true" alt="SuperNova" />
   
   <p>A powerful web proxy application built with Ultraviolet and modern web technologies</p>
   
