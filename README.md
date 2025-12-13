@@ -316,5 +316,5 @@ If you encounter any issues or have questions:
 ---
 
 <div align="center">
-  Made with love by the SuperNova Network team
+  Made with ❤ by the SuperNova Network team
 </div>
