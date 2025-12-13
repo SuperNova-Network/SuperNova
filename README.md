@@ -1,6 +1,6 @@
 
 <div align="center">
-   <img width="400" src="https://github.com/SuperNova-Network/SuperNova/blob/main/public/media/Title.png?raw=true" alt="SuperNova" />
+   <img width="540" src="https://github.com/SuperNova-Network/SuperNova/blob/main/public/media/Title.png?raw=true" alt="SuperNova" />
    <p><b>SuperNova</b> — A next-generation modular web proxy platform built with Node.js, Express, and advanced proxy backends.</p>
    <p>
       <a href="LICENSE"><img src="https://img.shields.io/badge/license-ISC-blue.svg" alt="License"></a>
