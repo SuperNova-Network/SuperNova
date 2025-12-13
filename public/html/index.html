@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <div class="index">
+        <section class="index__header">
+            <div class="index__logo"></div>
+            <ul class="index__nav">
+                <li class="index__active"><a href="#" data-tab="search">Search</a></li>
+                <li><a href="#" data-tab="games">Games</a></li>
+                <li><a href="#" data-tab="apps">Apps</a></li>
+                <li><a href="#" data-tab="movies">Movies</a></li>
+            </ul>
+            <div class="index__container">
+                <!-- Search Tab -->
+                <div class="index__search index__tab active" id="search">
+                    <form id="proxy-form" class="index__form">
+                        <div>
+                            <input name="q" type="search" id="proxy-address" value="" class="index__query"
+                                maxlength="512" autocomplete="off" title="Search" aria-label="Search" dir="ltr"
+                                spellcheck="false" placeholder="Search the web freely">
+                        </div>
+                        <button class="index__button" aria-label="Search" type="submit">
+                            <div class="index__ico"></div>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Games Tab -->
+                <div class="index__tab" id="games">
+                    <div class="index__content">
+                        <h2>Popular Games</h2>
+                        <p>Games content goes here</p>
+                    </div>
+                </div>
+
+                <!-- Apps Tab -->
+                <div class="index__tab" id="apps">
+                    <div class="index__content">
+                        <h2>Popular Apps</h2>
+                        <p>Apps content goes here</p>
+                    </div>
+                </div>
+
+                <!-- Movies Tab -->
+                <div class="index__tab" id="movies">
+                    <div class="index__content">
+                        <h2>Popular Movies</h2>
+                        <p>Movies content goes here</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <canvas id="canvas"></canvas>
+
+        <footer class="index__footer">
+            <div class="index__bottom">
+                <ul class="index__links">
+                    <li><a href="#about">Discord</a></li>
+                    <li><a href="#about">Terms</a></li>
+                    <li><a href="#about">Privacy</a></li>
+                    <li><a href="#about">Credits</a></li>
+                    <li><a href="#about">GitHub</a></li>
+                    <li><a href="./settings">Settings</a></li>
+                </ul>
+                <p class="index__copyright">&copy; 2023 SuperNova</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        document.querySelectorAll('.index__nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                const tabId = link.getAttribute('data-tab');
+
+                // Remove active class from all nav items
+                document.querySelectorAll('.index__nav li').forEach(li => {
+                    li.classList.remove('index__active');
+                });
+
+                // Add active class to clicked nav item
+                link.parentElement.classList.add('index__active');
+
+                // Hide all tabs
+                document.querySelectorAll('.index__tab').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+
+                // Show selected tab
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
+
+    <!-- Modal -->
+    <div class="modal" id="about" aria-hidden="true">
+        <div class="modal__dialog">
+            <div class="modal__header">
+                <h2>About</h2>
+                <a href="#" class="modal__close" aria-hidden="true">×</a>
+            </div>
+            <div class="modal__body">
+                <strong>Lorem Ipsum</strong><br>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+            <div class="modal__footer">
+                <p>Last Update 01.01.2019</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script src="/sj/register-sw.js" defer></script>
+<script src="/sj/search.js" defer></script>
+<script src="/sj/index.js" defer></script>
+<script src="/scram/scramjet.all.js"></script>
+<script src="/baremux/index.js" defer></script>
+<script src="/uv/uv.bundle.js" defer></script>
+<script src="/uv/uv.config.js" defer></script>
+<script src="/uv/register-sw.js" defer></script>
+<script src="/uv/search.js" defer></script>
+<script src="/uv/proxy.js" defer></script>
+<script src="./resources/scripts/stars.js"></script>
+
+</html>

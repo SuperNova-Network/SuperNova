@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      border: 0;
+      padding: 0;
+      background: #0000;
+    }
+    #frame {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      border: 0;
+      display: block;
+    }
+  </style>
+  <title>Proxy</title>
+  
+  <script src="/sj/register-sw.js" defer></script>
+  <script src="/sj/search.js" defer></script>
+  <script src="/sj/index.js" defer></script>
+  <script src="/scram/scramjet.all.js"></script>
+  <script src="/baremux/index.js" defer></script>
+  <script src="/uv/uv.bundle.js" defer></script>
+  <script src="/uv/uv.config.js" defer></script>
+  <script src="/uv/register-sw.js" defer></script>
+  <script src="/uv/search.js" defer></script>
+  <script src="/uv/proxy.js" defer></script>
+</head>
+
+<body>
+  <iframe id="frame" src="/new" allow="fullscreen"></iframe>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const iframe = document.getElementById("frame");
+      const lpUrl = sessionStorage.getItem("lpurl");
+
+      function loadJsDelivrIntoFrame(url) {
+        fetch(url)
+          .then((res) => res.text())
+          .then((html) => {
+            const doc = iframe.contentDocument || iframe.contentWindow.document;
+            doc.open();
+            doc.write(html);
+            doc.close();
+          })
+          .catch((error) => {
+            console.error("Error loading jsdelivr content:", error);
+            iframe.src = "/new";
+          });
+      }
+
+      function resolveStartUrl(u) {
+        if (!u) return "/new";
+        if (u.includes("jsdelivr")) return u; // handled by fetch/write
+        if (u.startsWith("/uv") || u.startsWith("/scramjet")) return u;
+        if (u.startsWith("http")) {
+          return localStorage.getItem("proxy-backend") === "ultraviolet"
+            ? window.encodeAny(u)
+            : window.sjEncodeAndGo(u);
+        }
+        return `/cdn/${u}/`;
+      }
+
+      if (lpUrl) {
+        if (lpUrl.includes("jsdelivr")) {
+          loadJsDelivrIntoFrame(lpUrl);
+        } else {
+          iframe.src = resolveStartUrl(lpUrl);
+        }
+      } else {
+        iframe.src = "/new";
+      }
+    });
+  </script>
+</body>
+
+</html>
