@@ -1,1 +1,35 @@
-<h1>Yo, there aint nothin here (404 btw)</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>404 Not Found</title>
+	<link rel="stylesheet" href="./css/styles.css">
+	<style>
+		.loading-overlay__404 {
+			position: fixed;
+			left: 0;
+			right: 0;
+			bottom: 32px;
+			text-align: center;
+			color: #ff3b3b;
+			font-size: 1.5em;
+			font-weight: bold;
+			z-index: 50;
+			text-shadow: 0 2px 8px #000a;
+		}
+	</style>
+</head>
+<body style="background: #111; margin:0;">
+	<div class="loading-overlay">
+		<div class="loading-overlay__content">
+			<div class="loading-overlay__spinner">
+				<div class="loading-overlay__ring loading-overlay__ring--bg"></div>
+				<div class="loading-overlay__ring loading-overlay__ring--fg"></div>
+			</div>
+			<p class="loading-overlay__text">Loading...</p>
+		</div>
+	</div>
+	<div class="loading-overlay__404">404...</div>
+</body>
+</html>
