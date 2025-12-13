@@ -80,14 +80,7 @@ app.get("/api/commit", (req, res) => {
     res.status(500).json({ error: "Could not get commit" });
   }
 });
-// ...existing code...
 
-// this is for the users who have a bookmark like https://lunaar.org/play?game=2048
-app.get("/play", (req, res) => {
-  res.redirect("/science");
-});
-
-// ...existing code...
 app.get("/settings", (req, res) => {
   res.sendFile(join(__dirname, publicPath, "html", "settings.html"));
 });
