@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./css/styles.css">
   <style>
-    html, body {
+    html,
+    body {
       height: 100%;
       width: 100%;
       margin: 0;
@@ -14,6 +15,7 @@
       padding: 0;
       background: #111;
     }
+
     #frame {
       position: fixed;
       top: 0;
@@ -25,7 +27,7 @@
     }
   </style>
   <title>Proxy</title>
-  
+
   <script src="/sj/register-sw.js" defer></script>
   <script src="/sj/search.js" defer></script>
   <script src="/sj/index.js" defer></script>
@@ -39,11 +41,23 @@
 </head>
 
 <body>
-  <iframe id="frame" src="/new" allow="fullscreen"></iframe>
+
+  <div id="loading-overlay" class="fixed inset-0 flex items-center justify-center bg-background/80 z-40">
+    <div class="flex flex-col items-center gap-3">
+      <div class="relative w-12 h-12">
+        <div class="absolute inset-0 border-4 border-primary/20 rounded-full"></div>
+        <div class="absolute inset-0 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+      </div>
+      <p class="text-sm text-muted-foreground">Loading...</p>
+    </div>
+  </div>
+  <iframe id="frame" src="/new" allow="fullscreen"
+    style="position:fixed;top:0;left:0;width:100vw;height:100vh;border:0;display:block;z-index:41;"></iframe>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const iframe = document.getElementById("frame");
+      const overlay = document.getElementById("loading-overlay");
       const lpUrl = sessionStorage.getItem("lpurl");
 
       function loadJsDelivrIntoFrame(url) {
@@ -82,16 +96,23 @@
       } else {
         iframe.src = "/new";
       }
+
+      // Hide overlay when iframe fully loads
+      iframe.addEventListener('load', function () {
+        if (overlay) overlay.remove();
+      });
     });
   </script>
 
   <div class="loading-overlay hidden">
-    <div class="loading-overlay__content">
-      <div class="loading-overlay__spinner">
-        <div class="loading-overlay__ring loading-overlay__ring--bg"></div>
-        <div class="loading-overlay__ring loading-overlay__ring--fg"></div>
+    <div class="fixed inset-0 flex items-center justify-center bg-background/80 z-40">
+      <div class="flex flex-col items-center gap-3">
+        <div class="relative w-12 h-12">
+          <div class="absolute inset-0 border-4 border-primary/20 rounded-full"></div>
+          <div class="absolute inset-0 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+        </div>
+        <p class="text-sm text-muted-foreground">Loading...</p>
       </div>
-      <p class="loading-overlay__text">Loading...</p>
     </div>
   </div>
 </body>
