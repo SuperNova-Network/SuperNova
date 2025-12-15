@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="540" src="https://github.com/SuperNova-Network/SuperNova/blob/main/public/media/Title.png?raw=true" alt="SuperNova" />
+   <img width="540" src="public/media/Title.png" alt="SuperNova" />
 
   <p align="center">
     A next-generation modular web proxy platform built with Node.js, Express, <br>
@@ -279,32 +279,6 @@ For any Node.js hosting platform:
 2. Run `npm install`
 3. Start with `npm start`
 4. Ensure port 3000 is accessible (or configure as needed)
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request. Make sure to:
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-Please read [CODE_OF_CONDUCT](CODE_OF_CONDUCT) before contributing.
-
-## License
-
-This project is licensed under the ISC License - see the [LICENSE](LICENSE) file for details.
-
-## Terms of Use
-
-Please read the [Terms of Use](Terms-of-Use.md) before using SuperNova.
-
-## Links
-
-- **GitHub Repository**: [https://github.com/SuperNova-Network/SuperNova](https://github.com/SuperNova-Network/SuperNova)
-- **Issues**: [Report a bug or request a feature](https://github.com/SuperNova-Network/SuperNova/issues)
-- **Discord**: [Join our community](https://discord.gg/7zD99WY2bR)
 
 ## Support
 
