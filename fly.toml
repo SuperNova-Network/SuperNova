@@ -1,4 +1,4 @@
-app = "supernova-launch1"
+app = "supernova"
 primary_region = "ord"
 
 [build]
