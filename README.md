@@ -1,8 +1,8 @@
 <div align="center">
   <img width="540" src="public/media/Title.png" alt="SuperNova" />
-  <p align="center">
+  <p align="center" style="margin-top:10px;">
     A next-generation modular web proxy platform built with Node.js, Express, <br>
-   and advanced proxy backends.
+    and advanced proxy backends.
   </p>
 
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-ISC-blue.svg" alt="License"></a>
