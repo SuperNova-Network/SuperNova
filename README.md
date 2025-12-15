@@ -1,6 +1,6 @@
 <div align="center">
   <img width="540" src="public/media/Title.png" alt="SuperNova" />
-  <p align="center" style="margin-top:13px;">
+  <p align="center" style="margin-top:20px;">
     A next-generation modular web proxy platform built with Node.js, Express, <br>
     and advanced proxy backends.
   </p>
