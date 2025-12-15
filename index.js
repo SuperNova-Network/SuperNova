@@ -139,5 +139,5 @@ function shutdown() {
 
 server.listen({
   port,
-  host: "0.0.0.0"
+  host: "0.0.0.0" /*, <-- (BROKEN) When starting the project locally, make sure to use port 8080 instead */,
 });
