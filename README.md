@@ -113,43 +113,9 @@ PORT=8080 npm start
 
 ---
 
-## Deployment
-
-SuperNova can be deployed on:
-
-- **Fly.io:**
-   ```bash
-   fly launch
-   fly deploy
-   ```
-- **Render:** Connect your GitHub repo and deploy automatically
-- **Vercel:**
-   ```bash
-   vercel
-   ```
-- **Manual Node.js Hosting:**
-   1. Upload files
-   2. Run `npm install`
-   3. Start with `npm start`
-   4. Ensure port 3000 is accessible (or configure as needed)
-
----
-
 ## Contributing
 
 Contributions are welcome! Please fork the repo, create a feature branch, and submit a Pull Request. See [CODE_OF_CONDUCT](CODE_OF_CONDUCT) before contributing.
-
----
-
-## License
-
-This project is licensed under the ISC License. See [LICENSE](LICENSE) for details.
-
----
-
-## Terms of Use
-
-See [Terms-of-Use.md](Terms-of-Use.md) for proxy disclaimer and legal information. Use responsibly and comply with all applicable laws.
 
 ---
 
@@ -160,19 +126,6 @@ See [Terms-of-Use.md](Terms-of-Use.md) for proxy disclaimer and legal informatio
 - [Proxy Backend & Service Worker Details](docs/proxy-backend-serviceworker-details.md)
 
 For help, open an issue or join the community.
-   ```
-
-3. **Start the application**
-   
-   Development mode (with auto-reload):
-   ```bash
-   npm run dev
-   ```
-   
-   Production mode:
-   ```bash
-   npm start
-   ```
 
 4. **Access the application**
    
