@@ -30,7 +30,6 @@ Object.assign(wisp.options, {
   dns_servers: ["1.1.1.3", "1.0.0.3"],
 });
 
-
 // --- Server/Proxy Setup ---
 const cdnProxy = httpProxy.createProxyServer();
 const bare = createBareServer("/bare/");
@@ -64,20 +63,6 @@ app.use("/cdn", (req, res) => {
     target: "https://gms.parcoil.com/",
     changeOrigin: true,
   });
-});
-app.get("/api/autocomplete", async (req, res) => {
-  const q = req.query.q || "";
-  const duckUrl = `https://duckduckgo.com/ac/?q=${encodeURIComponent(q)}`;
-
-  try {
-    const response = await fetch(duckUrl);
-    const data = await response.json();
-
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.json(data);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch suggestions" });
-  }
 });
 app.get("/api/version", (req, res) => {
   res.json({ version: packageJson.version });
