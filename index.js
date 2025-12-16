@@ -1,21 +1,27 @@
+
+// --- Core/Proxy Backends ---
 import { server as wisp } from "@mercuryworkshop/wisp-js/server";
 import { createBareServer } from "@tomphttp/bare-server-node";
-import httpProxy from "http-proxy";
 import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
 import { libcurlPath } from "@mercuryworkshop/libcurl-transport";
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
 import { bareModulePath } from "@mercuryworkshop/bare-as-module3";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
+import { scramjetPath } from "@mercuryworkshop/scramjet/path";
+
+// --- Core Server/Express ---
 import express from "express";
 import { createServer } from "node:http";
 import { join } from "path";
-import packageJson from "./package.json" with { type: "json" };
 import compression from "compression";
 import { fileURLToPath } from "node:url";
+
+// --- Utilities/Other ---
+import httpProxy from "http-proxy";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
 import { execSync } from "node:child_process";
-import { scramjetPath } from "@mercuryworkshop/scramjet/path";
+import packageJson from "./package.json" with { type: "json" };
 
 dotenv.config();
 
@@ -24,14 +30,17 @@ Object.assign(wisp.options, {
   dns_servers: ["1.1.1.3", "1.0.0.3"],
 });
 
+// --- Server/Proxy Setup ---
 const cdnProxy = httpProxy.createProxyServer();
 const bare = createBareServer("/bare/");
 const __dirname = join(fileURLToPath(import.meta.url), "..");
 const app = express();
+const publicPath = "public";
+
+// --- Express Middleware ---
 app.disable("x-powered-by");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-const publicPath = "public";
 
 app.set("views", join(__dirname, publicPath, "html"));
 app.use(compression());
@@ -54,20 +63,6 @@ app.use("/cdn", (req, res) => {
     target: "https://gms.parcoil.com/",
     changeOrigin: true,
   });
-});
-app.get("/api/autocomplete", async (req, res) => {
-  const q = req.query.q || "";
-  const duckUrl = `https://duckduckgo.com/ac/?q=${encodeURIComponent(q)}`;
-
-  try {
-    const response = await fetch(duckUrl);
-    const data = await response.json();
-
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.json(data);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch suggestions" });
-  }
 });
 app.get("/api/version", (req, res) => {
   res.json({ version: packageJson.version });
@@ -93,6 +88,8 @@ app.get("/package.json", (req, res) => {
 app.get("*", (req, res) => {
   res.sendFile(join(__dirname, publicPath, "html", "404.html"));
 });
+
+// --- HTTP/Upgrade Handling ---
 const server = createServer();
 
 server.on("request", (req, res) => {
@@ -139,4 +136,5 @@ function shutdown() {
 
 server.listen({
   port,
+  host: "0.0.0.0" /*, <-- (BROKEN) When starting the project locally, make sure to use port 8080 instead */,
 });
