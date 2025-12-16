@@ -77,10 +77,10 @@ pnpm start
 git clone https://github.com/SuperNova-Network/SuperNova.git
 cd SuperNova
 docker build -t supernova .
-docker run -p 3000:3000 supernova
+docker run -p 8080:8080 supernova
 ```
 
-After starting, open your browser and go to [http://localhost:3000](http://localhost:3000)
+After starting, open your browser and go to [http://localhost:8080](http://localhost:8080)
 
 ---
 
