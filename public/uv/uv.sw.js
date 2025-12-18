@@ -275,9 +275,7 @@
     let s = `
         errorTrace.value = ${JSON.stringify(a)};
         fetchedURL.textContent = ${JSON.stringify(e)};
-        for (const node of document.querySelectorAll("#uvHostname")) node.textContent = ${JSON.stringify(
-          location.hostname
-        )};
+        for (const node of document.querySelectorAll("#uvHostname")) node.textContent = ${JSON.stringify(location.hostname)};
         reload.addEventListener("click", () => location.reload());
         uvVersion.textContent = ${JSON.stringify("3.2.10")};
         uvBuild.textContent = ${JSON.stringify("92d9075")};
@@ -286,230 +284,36 @@
         <html>
         <head>
         <meta charset='utf-8' />
-        <title>Error - \u004C\u0075\u006E\u0061\u0061\u0072</title>
+        <title>Error</title>
         <style>
-        * { 
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-        }
-        
-        body { 
-          background-color: var(--bg-color, #090810);
-          color: var(--text-color, #e5e4f2);
-          font-family: var(--font-family, "Poppins", sans-serif);
-          line-height: 1.6;
-          padding: 2rem;
-          min-height: 100vh;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-        }
-        
-        h1 { 
-          color: var(--primary-color, #9282fb);
-          margin-bottom: 1rem;
-          font-size: 2.5rem;
-          text-align: center;
-        }
-        
-        hr { 
-          border: none;
-          height: 2px;
-          background: var(--border-color, #2c2c3f);
-          margin: 2rem 0;
-          width: 100%;
-          max-width: 600px;
-        }
-        
-        p { 
-          margin: 1rem 0;
-          text-align: center;
-          max-width: 600px;
-        }
-        
-        b { 
-          color: var(--accent-color, #b263a6);
-          font-weight: 600;
-        }
-        
-        textarea { 
-          background: var(--bg-2-color, #171527);
-          border: 2px solid var(--border-color, #2c2c3f);
-          border-radius: var(--border-radius, 12px);
-          color: var(--text-color, #e5e4f2);
-          padding: 1rem;
-          width: 100%;
-          max-width: 600px;
-          height: 200px;
-          font-family: monospace;
-          resize: vertical;
-          margin: 1rem 0;
-        }
-        
-        textarea:focus {
-          outline: none;
-          border-color: var(--primary-color, #9282fb);
-          box-shadow: 0 0 0 3px rgba(146, 130, 251, 0.1);
-        }
-        
-        ul { 
-          margin: 1rem 0;
-          padding-left: 2rem;
-          max-width: 600px;
-        }
-        
-        li { 
-          margin: 0.5rem 0;
-          color: var(--text-secondary-color, #b0b0b0);
-        }
-        
-        button { 
-          background: var(--primary-color, #9282fb);
-          color: var(--text-color, #e5e4f2);
-          border: none;
-          border-radius: var(--border-radius, 12px);
-          padding: 0.75rem 2rem;
-          font-size: 1rem;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.2s ease;
-          margin: 1rem 0;
-        }
-        
-        button:hover {
-          background: var(--accent-color, #b263a6);
-          transform: translateY(-2px);
-          box-shadow: 0 4px 20px rgba(146, 130, 251, 0.3);
-        }
-        
-        a { 
-          color: var(--primary-color, #9282fb);
-          text-decoration: none;
-          transition: color 0.2s ease;
-        }
-        
-        a:hover {
-          color: var(--accent-color, #b263a6);
-        }
-        
-        i { 
-          color: var(--text-secondary-color, #b0b0b0);
-          font-style: normal;
-        }
-        
-        .error-container {
-          background: var(--bg-2-color, #171527);
-          border: 2px solid var(--border-color, #2c2c3f);
-          border-radius: var(--border-radius, 12px);
-          padding: 2rem;
-          max-width: 700px;
-          width: 100%;
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-        
-        .error-header {
-          text-align: center;
-          margin-bottom: 2rem;
-        }
-        
-        .error-content {
-          margin-bottom: 2rem;
-        }
-        
-        .error-actions {
-          text-align: center;
-        }
-        
-        .error-footer {
-          text-align: center;
-          margin-top: 2rem;
-        }
-        
-        @media (max-width: 768px) {
-          body {
-            padding: 1rem;
-          }
-          
-          h1 {
-            font-size: 2rem;
-          }
-          
-          .error-container {
-            padding: 1.5rem;
-          }
-        }
+        * { background-color: white }
         </style>
-            <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-W8NZMM8WN9"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-W8NZMM8WN9");
-    </script>
-
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1565760898646999"
-      crossorigin="anonymous"
-    ></script>
-  <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init('phc_P06vTyQqGuoDZVvO6sIw4diVNQH1vcqahBmrqhx1TrO',{api_host:'https://us.i.posthog.com', defaults:'2025-05-24'})
-</script>
-
-</head>
+        </head>
         <body>
-        <div class="error-container">
-          <div class="error-header">
-          
-            <h1 id='errorTitle'>Error Processing Request</h1>
-          </div>
-          
-          <div class="error-content">
-            <p>Failed to load <b id="fetchedURL"></b></p>
-            <p id="errorMessage">Internal Server Error</p>
-            
-            <textarea id="errorTrace" cols="40" rows="10" readonly placeholder="Error details will appear here..."></textarea>
-            
-            <p><b>Try these solutions:</b></p>
-            <ul>
-              <li>Check your internet connection</li>
-              <li>Verify you entered the correct address</li>
-              <li>Clear the site data and cookies</li>
-              <li>Contact <b id="uvHostname"></b>'s administrator</li>
-              <li>Verify the server isn't censored</li>
-            </ul>
-            
-            <p><b>If you're the administrator of <b id="uvHostname"></b>:</b></p>
-            <ul>
-              <li>Restart your server</li>
-              <li>Update Ultraviolet to the latest version</li>
-              <li>Troubleshoot the error on the <a href="https://github.com/titaniumnetwork-dev/Ultraviolet" target="_blank">GitHub repository</a></li>
-            </ul>
-          </div>
-          
-          <div class="error-actions">
-            <button id="reload">Reload Page</button>
-          </div>
-          
-          <div class="error-footer">
-            <i>SuperNova V2 Ultraviolet v<span id="uvVersion"></span> (build <span id="uvBuild"></span>)</i>
-          </div>
-        </div>
-        <script src="${
-          "data:application/javascript," + encodeURIComponent(s)
-        }"><\/script>
-        <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-</body>
+        <h1 id='errorTitle'>Error processing your request</h1>
+        <hr />
+        <p>Failed to load <b id="fetchedURL"></b></p>
+        <p id="errorMessage">Internal Server Error</p>
+        <textarea id="errorTrace" cols="40" rows="10" readonly></textarea>
+        <p>Try:</p>
+        <ul>
+        <li>Checking your internet connection</li>
+        <li>Verifying you entered the correct address</li>
+        <li>Clearing the site data</li>
+        <li>Contacting <b id="uvHostname"></b>'s administrator</li>
+        <li>Verify the server isn't censored</li>
+        </ul>
+        <p>If you're the administrator of <b id="uvHostname"></b>, try:</p>
+        <ul>
+        <li>Restarting your server</li>
+        <li>Updating Ultraviolet</li>
+        <li>Troubleshooting the error on the <a href="https://github.com/titaniumnetwork-dev/Ultraviolet" target="_blank">GitHub repository</a></li>
+        </ul>
+        <button id="reload">Reload</button>
+        <hr />
+        <p><i>Ultraviolet v<span id="uvVersion"></span> (build <span id="uvBuild"></span>)</i></p>
+        <script src="${"data:application/javascript," + encodeURIComponent(s)}"><\/script>
+        </body>
         </html>
         `;
   }
