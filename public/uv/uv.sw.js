@@ -24,7 +24,7 @@
     g = class extends h.EventEmitter {
       constructor(e = __uv$config) {
         (super(),
-          e.prefix || (e.prefix = "/service/"),
+          e.prefix || (e.prefix = "/search?query="),
           (this.config = e),
           (this.bareClient = new h.BareClient()));
       }
@@ -40,8 +40,20 @@
           typeof this.config.construct == "function" &&
             this.config.construct(t, "service");
           let w = await t.cookie.db();
+          // Custom: extract the base64 query from /search?query=... or /go?query=...
+          let urlObj = new URL(e.url);
+          let encoded = urlObj.searchParams.get("query");
+          let decoded = encoded ? decodeURIComponent(encoded) : "";
+          // Try to decode as base64 (for /go?query=...)
+          let realUrl = "";
+          try {
+            realUrl = decoded ? decodeURIComponent(escape(atob(decoded))) : "";
+          } catch (err) {
+            // fallback: treat as plain
+            realUrl = decoded;
+          }
           ((t.meta.origin = location.origin),
-            (t.meta.base = t.meta.url = new URL(t.sourceUrl(e.url))));
+            (t.meta.base = t.meta.url = new URL(realUrl)));
           let o = new v(
             e,
             t,

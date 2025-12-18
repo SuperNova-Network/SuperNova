@@ -159,9 +159,16 @@ window.encodeAny = encodeAny;
 function start(url) {
   try {
     if (__uv$config.prefix && __uv$config) {
+      // Use only the hostname for the query param (like Scramjet)
+      let hostname = "";
+      try {
+        hostname = new URL(url).hostname;
+      } catch (err) {
+        hostname = url;
+      }
+      const base64 = btoa(unescape(encodeURIComponent(hostname)));
       sessionStorage.setItem("lpurl", encodeURL(url));
-      // console.log("\u004C\u0075\u006E\u0061\u0061\u0072 Proxy URL:", sessionStorage.getItem("lpurl"));
-      location.href = "/go";
+      location.href = "/go?query=" + encodeURIComponent(base64);
       sessionStorage.setItem("rawurl", url);
     }
   } catch (e) {
@@ -181,7 +188,9 @@ form.addEventListener("submit", async (event) => {
 
     console.log(res);
     sessionStorage.setItem("lpurl", res);
-    window.location.href = "/go";
+    // Use URL-encoded Base64 of the original value for the query param
+    const base64 = btoa(unescape(encodeURIComponent(address.value)));
+    window.location.href = "/go?query=" + encodeURIComponent(base64);
   }
 });
 console.log("Proxy started");
