@@ -50,7 +50,7 @@
           if (
             (t.meta.url.protocol === "blob:" &&
               ((o.blob = !0), (o.base = o.url = new URL(o.url.pathname))),
-            e.referrer && e.referrer.startsWith(location.origin))
+              e.referrer && e.referrer.startsWith(location.origin))
           ) {
             let i = new URL(t.sourceUrl(e.referrer));
             ((o.headers.origin ||
@@ -66,14 +66,14 @@
           if ((this.emit("request", p), p.intercepted)) return p.returnValue;
           s = o.blob ? "blob:" + location.origin + o.url.pathname : o.url;
           let c = await this.bareClient.fetch(s, {
-              headers: o.headers,
-              method: o.method,
-              body: o.body,
-              credentials: o.credentials,
-              mode: o.mode,
-              cache: o.cache,
-              redirect: o.redirect,
-            }),
+            headers: o.headers,
+            method: o.method,
+            body: o.body,
+            credentials: o.credentials,
+            mode: o.mode,
+            cache: o.cache,
+            redirect: o.redirect,
+          }),
             r = new y(o, c),
             l = new u(r, null, null);
           if ((this.emit("beforemod", l), l.intercepted)) return l.returnValue;
@@ -81,7 +81,7 @@
           if (
             (r.headers.location &&
               (r.headers.location = t.rewriteUrl(r.headers.location)),
-            ["document", "iframe"].includes(e.destination))
+              ["document", "iframe"].includes(e.destination))
           ) {
             let i = r.getHeader("content-disposition");
             if (!/\s*?((inline|attachment);\s*?)filename=/i.test(i)) {
@@ -105,8 +105,8 @@
                   });
                 });
               }),
-              delete r.headers["set-cookie"]),
-            r.body)
+                delete r.headers["set-cookie"]),
+              r.body)
           )
             switch (e.destination) {
               case "script":
@@ -124,9 +124,9 @@
                     .join(",");
                   ((r.body = `if (!self.__uv) {
                                 ${t.createJsInject(
-                                  t.cookie.serialize(f, t.meta, !0),
-                                  e.referrer
-                                )}
+                    t.cookie.serialize(f, t.meta, !0),
+                    e.referrer
+                  )}
                             importScripts(${i});
                             }
 `),
@@ -154,10 +154,10 @@
                       new RegExp(d.host).test(S.host) &&
                         (d.injectTo === "head"
                           ? (n !== -1 || m !== -1) &&
-                            (i = i.slice(0, n) + `${d.html}` + i.slice(n))
+                          (i = i.slice(0, n) + `${d.html}` + i.slice(n))
                           : d.injectTo === "body" &&
-                            (b !== -1 || k !== -1) &&
-                            (i = i.slice(0, b) + `${d.html}` + i.slice(b)));
+                          (b !== -1 || k !== -1) &&
+                          (i = i.slice(0, b) + `${d.html}` + i.slice(b)));
                   }
                   r.body = t.rewriteHtml(i, {
                     document: !0,
@@ -177,17 +177,17 @@
             }
           return (
             o.headers.accept === "text/event-stream" &&
-              (r.headers["content-type"] = "text/event-stream"),
+            (r.headers["content-type"] = "text/event-stream"),
             crossOriginIsolated &&
-              (r.headers["Cross-Origin-Embedder-Policy"] = "require-corp"),
+            (r.headers["Cross-Origin-Embedder-Policy"] = "require-corp"),
             this.emit("response", l),
             l.intercepted
               ? l.returnValue
               : new Response(r.body, {
-                  headers: r.headers,
-                  status: r.status,
-                  statusText: r.statusText,
-                })
+                headers: r.headers,
+                status: r.status,
+                statusText: r.statusText,
+              })
           );
         } catch (t) {
           return ["document", "iframe"].includes(e.destination)
@@ -199,32 +199,32 @@
     };
   self.UVServiceWorker = g;
   var y = class {
-      constructor(e, s) {
-        ((this.request = e),
-          (this.raw = s),
-          (this.ultraviolet = e.ultraviolet),
-          (this.headers = {}));
-        for (let t in s.rawHeaders)
-          this.headers[t.toLowerCase()] = s.rawHeaders[t];
-        ((this.status = s.status),
-          (this.statusText = s.statusText),
-          (this.body = s.body));
-      }
-      get url() {
-        return this.request.url;
-      }
-      get base() {
-        return this.request.base;
-      }
-      set base(e) {
-        this.request.base = e;
-      }
-      getHeader(e) {
-        return Array.isArray(this.headers[e])
-          ? this.headers[e][0]
-          : this.headers[e];
-      }
-    },
+    constructor(e, s) {
+      ((this.request = e),
+        (this.raw = s),
+        (this.ultraviolet = e.ultraviolet),
+        (this.headers = {}));
+      for (let t in s.rawHeaders)
+        this.headers[t.toLowerCase()] = s.rawHeaders[t];
+      ((this.status = s.status),
+        (this.statusText = s.statusText),
+        (this.body = s.body));
+    }
+    get url() {
+      return this.request.url;
+    }
+    get base() {
+      return this.request.base;
+    }
+    set base(e) {
+      this.request.base = e;
+    }
+    getHeader(e) {
+      return Array.isArray(this.headers[e])
+        ? this.headers[e][0]
+        : this.headers[e];
+    }
+  },
     v = class {
       constructor(e, s, t = null) {
         ((this.ultraviolet = s),
@@ -321,7 +321,7 @@
     let s = { "content-type": "text/html" };
     return (
       crossOriginIsolated &&
-        (s["Cross-Origin-Embedder-Policy"] = "require-corp"),
+      (s["Cross-Origin-Embedder-Policy"] = "require-corp"),
       new Response(E(String(a), e), { status: 500, headers: s })
     );
   }
