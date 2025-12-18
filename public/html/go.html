@@ -15,7 +15,6 @@
       padding: 0;
       background: #111;
     }
-
     #frame {
       position: fixed;
       top: 0;
@@ -24,6 +23,21 @@
       height: 100vh;
       border: 0;
       display: block;
+      z-index: 10;
+    }
+    .loading-overlay__go {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(17, 17, 17, 0.75); /* translucent */
+      z-index: 9999;
+      transition: opacity 0.3s;
+    }
+    .loading-overlay__go.hidden {
+      opacity: 0;
+      pointer-events: none;
     }
   </style>
   <title></title>
@@ -41,8 +55,7 @@
 </head>
 
 <body>
-
-  <div id="loading-overlay" class="fixed inset-0 flex items-center justify-center bg-background/80 z-40">
+  <div id="loading-overlay" class="loading-overlay__go">
     <div class="flex flex-col items-center gap-3">
       <div class="relative w-12 h-12">
         <div class="absolute inset-0 border-4 border-primary/20 rounded-full"></div>
@@ -60,7 +73,17 @@
       const overlay = document.getElementById("loading-overlay");
       const lpUrl = sessionStorage.getItem("lpurl");
 
+      function showOverlay() {
+        overlay.classList.remove('hidden');
+        overlay.style.opacity = '1';
+      }
+      function hideOverlay() {
+        overlay.classList.add('hidden');
+        overlay.style.opacity = '0';
+      }
+
       function loadJsDelivrIntoFrame(url) {
+        showOverlay();
         fetch(url)
           .then((res) => res.text())
           .then((html) => {
@@ -87,6 +110,9 @@
         return `/cdn/${u}/`;
       }
 
+      // Always show overlay before loading
+      showOverlay();
+
       if (lpUrl) {
         if (lpUrl.includes("jsdelivr")) {
           loadJsDelivrIntoFrame(lpUrl);
@@ -99,7 +125,7 @@
 
       // Hide overlay when iframe fully loads
       iframe.addEventListener('load', function () {
-        if (overlay) overlay.remove();
+        setTimeout(hideOverlay, 100); // slight delay for smoothness
       });
     });
   </script>
