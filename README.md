@@ -84,23 +84,6 @@ After starting, open your browser and go to [http://localhost:8080](http://local
 
 ---
 
-
-## Configuration
-
-SuperNova supports multiple deployment platforms:
-- `Dockerfile` — Docker containerization
-- `fly.toml` — Fly.io deployment
-- `vercel.json` — Vercel deployment
-- `.env` — Environment variables (optional)
-
-**Change the port:**
-```bash
-PORT=8080 npm start
-```
-
----
-
-
 ## Technologies Used
 
 - **[Express.js](https://expressjs.com/)** — Web framework
