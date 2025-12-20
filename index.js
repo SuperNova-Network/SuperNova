@@ -40,11 +40,14 @@ app.use(express.urlencoded({ extended: true }));
 
 app.set("views", join(__dirname, publicPath, "html"));
 app.use(compression());
-// Serve static assets with cache headers
+// Serve static assets with improved cache headers
 app.use(express.static(publicPath, {
   setHeaders: (res, path) => {
-    // Cache all static assets for 7 days
-    if (path.match(/\.(js|css|png|jpg|jpeg|gif|svg|ico|woff2?|ttf|eot|mp4|webm)$/i)) {
+    if (path.match(/\.html$/i)) {
+      // Never cache HTML files
+      res.setHeader('Cache-Control', 'no-store');
+    } else if (path.match(/\.(js|css|png|jpg|jpeg|gif|svg|ico|woff2?|ttf|eot|mp4|webm)$/i)) {
+      // Cache static assets for 7 days
       res.setHeader('Cache-Control', 'public, max-age=604800, immutable');
     }
   }
