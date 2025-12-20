@@ -40,7 +40,15 @@ app.use(express.urlencoded({ extended: true }));
 
 app.set("views", join(__dirname, publicPath, "html"));
 app.use(compression());
-app.use(express.static(publicPath));
+// Serve static assets with cache headers
+app.use(express.static(publicPath, {
+  setHeaders: (res, path) => {
+    // Cache all static assets for 7 days
+    if (path.match(/\.(js|css|png|jpg|jpeg|gif|svg|ico|woff2?|ttf|eot|mp4|webm)$/i)) {
+      res.setHeader('Cache-Control', 'public, max-age=604800, immutable');
+    }
+  }
+}));
 app.use("/uv/", express.static(uvPath));
 app.use("/scram/", express.static(scramjetPath));
 app.use("/epoxy/", express.static(epoxyPath));
