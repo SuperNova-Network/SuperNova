@@ -19,11 +19,7 @@ import { fileURLToPath } from "node:url";
 // --- Utilities/Other ---
 import httpProxy from "http-proxy";
 import fetch from "node-fetch";
-import dotenv from "dotenv";
-import { execSync } from "node:child_process";
 import packageJson from "./package.json" with { type: "json" };
-
-dotenv.config();
 
 Object.assign(wisp.options, {
   allow_udp_streams: false,
@@ -116,7 +112,6 @@ if (isNaN(port)) port = 8080;
 
 server.on("listening", () => {
   const address = server.address();
-  console.clear();
   console.log("Listening on:");
   console.log(`\thttp://localhost:${address.port}`);
   console.log(

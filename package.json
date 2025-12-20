@@ -23,7 +23,6 @@
     "@titaniumnetwork-dev/ultraviolet": "^3.2.10",
     "@tomphttp/bare-server-node": "^2.0.5",
     "compression": "^1.7.5",
-    "dotenv": "^17.2.1",
     "express": "^4.21.2",
     "http-proxy": "^1.18.1",
     "node-fetch": "^3.3.2"
