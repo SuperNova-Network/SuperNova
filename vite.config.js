@@ -11,6 +11,9 @@ export default defineConfig({
     host: true,
     port: 5173,
     strictPort: true,
+    fs: {
+      allow: [__dirname],
+    },
     proxy: {
       "/api": backendTarget,
       "/cdn": backendTarget,

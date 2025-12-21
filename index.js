@@ -34,10 +34,20 @@ const __dirname = join(fileURLToPath(import.meta.url), "..");
 const app = express();
 const staticRoot = process.env.STATIC_DIR || "dist";
 const staticPath = join(__dirname, staticRoot);
+const staticMissingMessage = `Static directory "${staticRoot}" is missing. Run \`pnpm build\` or set STATIC_DIR to a directory containing built assets.`;
 if (!existsSync(staticPath)) {
-  console.warn(
-    `Static directory "${staticRoot}" was not found. Run \`pnpm build\` or set STATIC_DIR to a directory containing built assets.`,
-  );
+  console.warn(staticMissingMessage);
+}
+
+function sendStaticFile(res, filename, options = {}) {
+  const filePath = join(staticPath, filename);
+  if (existsSync(filePath)) {
+    res.sendFile(filePath);
+    return;
+  }
+
+  const status = options.status || 503;
+  res.status(status).type("text/plain").send(staticMissingMessage);
 }
 
 // --- Express Middleware ---
@@ -72,7 +82,7 @@ app.use("/sj/sw.js", (req, res, next) => {
   next();
 });
 app.get("/", (req, res) => {
-  res.sendFile(join(staticPath, "index.html"));
+  sendStaticFile(res, "index.html");
 });
 app.use("/cdn", (req, res) => {
   cdnProxy.web(req, res, {
@@ -93,16 +103,16 @@ app.get("/api/commit", (req, res) => {
 });
 
 app.get("/settings", (req, res) => {
-  res.sendFile(join(staticPath, "settings.html"));
+  sendStaticFile(res, "settings.html");
 });
 app.get("/go", (req, res) => {
-  res.sendFile(join(staticPath, "go.html"));
+  sendStaticFile(res, "go.html");
 });
 app.get("/package.json", (req, res) => {
   res.json(packageJson);
 });
 app.get("*", (req, res) => {
-  res.sendFile(join(staticPath, "404.html"));
+  sendStaticFile(res, "404.html", { status: 404 });
 });
 
 // --- HTTP/Upgrade Handling ---
