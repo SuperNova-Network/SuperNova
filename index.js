@@ -71,8 +71,21 @@ app.use("/sj/sw.js", (req, res, next) => {
   res.set("Service-Worker-Allowed", "/");
   next();
 });
+const servePage = (res, page) => {
+  const target = join(staticPath, page);
+  if (!existsSync(target)) {
+    res
+      .status(500)
+      .send(
+        `Static file "${page}" was not found in "${staticRoot}". Did you run "pnpm build" first?`,
+      );
+    return;
+  }
+  res.sendFile(target);
+};
+
 app.get("/", (req, res) => {
-  res.sendFile(join(staticPath, "index.html"));
+  servePage(res, "index.html");
 });
 app.use("/cdn", (req, res) => {
   cdnProxy.web(req, res, {
@@ -93,16 +106,16 @@ app.get("/api/commit", (req, res) => {
 });
 
 app.get("/settings", (req, res) => {
-  res.sendFile(join(staticPath, "settings.html"));
+  servePage(res, "settings.html");
 });
 app.get("/go", (req, res) => {
-  res.sendFile(join(staticPath, "go.html"));
+  servePage(res, "go.html");
 });
 app.get("/package.json", (req, res) => {
   res.json(packageJson);
 });
 app.get("*", (req, res) => {
-  res.sendFile(join(staticPath, "404.html"));
+  servePage(res, "404.html");
 });
 
 // --- HTTP/Upgrade Handling ---
