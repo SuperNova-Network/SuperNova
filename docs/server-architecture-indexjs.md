@@ -164,8 +164,9 @@ flowchart TD
 ---
 
 ## Static Asset Handling
-- All static files (HTML, JS, CSS, images, service workers) are served from the `public` directory or proxy-specific directories.
-- Express uses `express.static` to efficiently serve these assets.
+- The client is built with Vite into `dist/` (multi-page: home, settings, go, 404) and served by Express.
+- During development, Vite serves assets with HMR; in production, Express reads from `dist/` (override with `STATIC_DIR` if needed).
+- Proxy/static artifacts (Ultraviolet, Scramjet, etc.) are still served from their dedicated routes and copied from `public/` during the build.
 - Special handling for service worker files (e.g., `/sj/sw.js`) to set correct headers.
 
 ---

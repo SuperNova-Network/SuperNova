@@ -19,6 +19,8 @@ COPY pnpm-lock.yaml package.json ./
 RUN pnpm install --frozen-lockfile
 
 COPY . .
+RUN pnpm build
+RUN pnpm prune --prod
 
 # ---------- Final Runtime Image ----------
 FROM base
@@ -26,10 +28,13 @@ FROM base
 # Install pnpm again (THIS FIXES YOUR ERROR)
 RUN npm install -g pnpm
 
-# Copy everything from build
-COPY --from=build /app /app
-
 WORKDIR /app
+COPY --from=build /app/package.json /app/pnpm-lock.yaml ./
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/index.js ./index.js
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/docs ./docs
+COPY --from=build /app/public ./public
 
 EXPOSE 8080
 

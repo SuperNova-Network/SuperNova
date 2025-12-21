@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SuperNova Proxy</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        border: 0;
+        padding: 0;
+        background: #111;
+      }
+      #frame {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        border: 0;
+        display: block;
+        z-index: 10;
+      }
+      .loading-overlay__go {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(17, 17, 17, 0.75);
+        z-index: 9999;
+        transition: opacity 0.3s;
+      }
+      .loading-overlay__go.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="loading-overlay" class="loading-overlay__go">
+      <div class="flex flex-col items-center gap-3">
+        <div class="relative w-12 h-12">
+          <div class="absolute inset-0 border-4 border-primary/20 rounded-full"></div>
+          <div class="absolute inset-0 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+        </div>
+        <p class="text-sm text-muted-foreground">Loading...</p>
+      </div>
+    </div>
+    <iframe
+      id="frame"
+      src="/new"
+      allow="fullscreen"
+      style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; border: 0; display: block; z-index: 41"
+    ></iframe>
+
+    <div class="loading-overlay hidden">
+      <div class="fixed inset-0 flex items-center justify-center bg-background/80 z-40">
+        <div class="flex flex-col items-center gap-3">
+          <div class="relative w-12 h-12">
+            <div class="absolute inset-0 border-4 border-primary/20 rounded-full"></div>
+            <div class="absolute inset-0 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+          </div>
+          <p class="text-sm text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/go/main.js"></script>
+
+    <script src="/sj/register-sw.js" defer></script>
+    <script src="/sj/search.js" defer></script>
+    <script src="/sj/index.js" defer></script>
+    <script src="/scram/scramjet.all.js"></script>
+    <script src="/baremux/index.js" defer></script>
+    <script src="/uv/uv.bundle.js" defer></script>
+    <script src="/uv/uv.config.js" defer></script>
+    <script src="/uv/register-sw.js" defer></script>
+    <script src="/uv/search.js" defer></script>
+    <script src="/uv/proxy.js" defer></script>
+  </body>
+</html>
