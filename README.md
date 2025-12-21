@@ -84,6 +84,17 @@ After starting, open your browser and go to [http://localhost:8080](http://local
 
 ---
 
+## Development & Build
+
+- `pnpm dev`: Runs Vite with HMR for the client and `nodemon` for the Express backend side by side.
+- `pnpm build`: Produces a production-ready Vite build (multi-page: home, settings, go, 404) into `dist/`.
+- `pnpm preview`: Serves the built site locally for smoke testing.
+- `pnpm start`: Serves the built assets from `dist/` via Express (ensure you run `pnpm build` first or set `STATIC_DIR`).
+
+Set `STATIC_DIR` to override the directory Express serves static assets from.
+
+---
+
 ## Technologies Used
 
 - **[Express.js](https://expressjs.com/)** — Web framework
@@ -119,4 +130,3 @@ For help, open an issue or join the community.
 <div align="center">
   Made with ❤ by the SuperNova Network team
 </div>
-

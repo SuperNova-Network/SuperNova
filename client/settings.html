@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Settings</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body class="settings-page">
+    <div class="settings-wrapper">
+      <div class="settings-inner">
+        <header class="settings-header">
+          <a class="settings-back" href="./">← Back to SuperNova</a>
+          <h1>settings</h1>
+
+          <div class="settings-tabs">
+            <a class="settings-tab-link" href="#">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="tab-icon"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              Browsing History
+            </a>
+            <a class="settings-tab-link" href="#">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="tab-icon"
+              >
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+              </svg>
+              Bookmarks
+            </a>
+          </div>
+        </header>
+
+        <div class="settings-content">
+          <section class="settings-section">
+            <div class="section-header with-toggle">
+              <div>
+                <h2>Panic Button</h2>
+                <p>Quickly redirect to another site by pressing a key. Works globally across all pages.</p>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="panic-enabled" />
+                <span class="toggle-switch"></span>
+              </label>
+            </div>
+
+            <div class="section-body">
+              <div class="input-group">
+                <label>Panic Key</label>
+                <button class="pill-btn" id="panic-key-display">Escape</button>
+              </div>
+
+              <div class="input-group">
+                <label>Redirect URL</label>
+                <input
+                  class="text-input"
+                  id="redirect-url"
+                  type="text"
+                  placeholder="https://classroom.google.com"
+                  value="https://classroom.google.com"
+                />
+              </div>
+            </div>
+          </section>
+
+          <section class="settings-section">
+            <div class="section-header with-toggle">
+              <div>
+                <h2>Auto Cloak</h2>
+                <p>Disguise the tab when switching away.</p>
+              </div>
+
+              <label class="toggle">
+                <input type="checkbox" />
+                <span class="toggle-switch"></span>
+              </label>
+            </div>
+          </section>
+
+          <section class="settings-section">
+            <div class="section-header">
+              <h2>URL Cloaker</h2>
+              <p>Cloak the site in an iframe to hide the actual address.</p>
+            </div>
+
+            <div class="button-grid">
+              <button type="button" class="option-btn cloak-option" data-cloak="blob" id="cloak-blob">
+                Blob URL
+                <span class="subtext">blob:https://...</span>
+              </button>
+
+              <button type="button" class="option-btn cloak-option" data-cloak="about" id="cloak-about">
+                About Blank
+                <span class="subtext">about:blank</span>
+              </button>
+            </div>
+
+            <button type="button" class="primary-btn" id="apply-cloak">Apply Blob Cloak</button>
+          </section>
+
+          <section class="settings-section">
+            <div class="section-header with-toggle">
+              <div>
+                <h2>Anti-Close</h2>
+                <p>Show a confirmation popup when attempting to close or reload the tab to prevent accidental closures.</p>
+              </div>
+
+              <label class="toggle">
+                <input type="checkbox" />
+                <span class="toggle-switch"></span>
+              </label>
+            </div>
+          </section>
+
+          <section class="settings-section">
+            <div class="section-header">
+              <h2>Proxy Type</h2>
+              <p>Select which proxy backend to use.</p>
+            </div>
+
+            <div class="button-grid">
+              <button type="button" class="option-btn proxy-option selected" data-proxy="scramjet" id="proxy-scramjet">
+                Scramjet
+                <span class="subtext">Experimental (Default)</span>
+              </button>
+              <button type="button" class="option-btn proxy-option" data-proxy="ultraviolet" id="proxy-ultraviolet">
+                Ultraviolet
+                <span class="subtext">Stable and Proven</span>
+              </button>
+            </div>
+          </section>
+
+          <section class="settings-section">
+            <div class="section-header">
+              <h2>Transport Type</h2>
+              <p>Select which transport backend to use for proxy connections.</p>
+            </div>
+
+            <div class="button-grid transport-grid">
+              <button type="button" class="option-btn transport-option" data-transport="epoxy" id="transport-epoxy">
+                Epoxy
+                <span class="subtext">Fast, multiplexed connections for modern networks</span>
+              </button>
+              <button
+                type="button"
+                class="option-btn transport-option selected"
+                data-transport="bare"
+                id="transport-bare"
+              >
+                Bare
+                <span class="subtext">Simple, direct HTTP(S) for best compatibility</span>
+              </button>
+              <button type="button" class="option-btn transport-option" data-transport="libcurl" id="transport-libcurl">
+                Libcurl
+                <span class="subtext">Robust, reliable, supports many protocols (Default)</span>
+              </button>
+            </div>
+          </section>
+
+          <section class="settings-section">
+            <div class="data-block">
+              <div class="data-header">
+                <h2>Data Management</h2>
+                <p>
+                  Export and import all your browsing data including history, bookmarks, localStorage, sessionStorage,
+                  cookies, and IndexedDB databases.
+                </p>
+              </div>
+
+              <div class="data-actions">
+                <button type="button" class="data-btn data-btn-primary export-button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 15V3"></path>
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <path d="m7 10 5 5 5-5"></path>
+                  </svg>
+                  Export All Data
+                </button>
+
+                <button type="button" class="data-btn data-btn-secondary import-button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 3v12"></path>
+                    <path d="m17 8-5-5-5 5"></path>
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  </svg>
+                  Import Data
+                </button>
+              </div>
+
+              <p class="data-hint">
+                Export creates a backup of all your history, bookmarks, settings, and site data. Import restores from a
+                backup file.
+              </p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/settings/main.js"></script>
+
+    <script src="/sj/register-sw.js" defer></script>
+    <script src="/sj/search.js" defer></script>
+    <script src="/sj/index.js" defer></script>
+    <script src="/scram/scramjet.all.js" defers></script>
+    <script src="/baremux/index.js" defer></script>
+    <script src="/uv/uv.bundle.js" defer></script>
+    <script src="/uv/uv.config.js" defer></script>
+    <script src="/uv/register-sw.js" defer></script>
+    <script src="/uv/search.js" defer></script>
+    <script src="/uv/proxy.js" defer></script>
+  </body>
+</html>

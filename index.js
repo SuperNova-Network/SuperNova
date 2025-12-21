@@ -12,13 +12,14 @@ import { scramjetPath } from "@mercuryworkshop/scramjet/path";
 // --- Core Server/Express ---
 import express from "express";
 import { createServer } from "node:http";
-import { join } from "path";
+import { join } from "node:path";
 import compression from "compression";
 import { fileURLToPath } from "node:url";
+import { existsSync } from "node:fs";
+import { execSync } from "node:child_process";
 
 // --- Utilities/Other ---
 import httpProxy from "http-proxy";
-import fetch from "node-fetch";
 import packageJson from "./package.json" with { type: "json" };
 
 Object.assign(wisp.options, {
@@ -31,27 +32,35 @@ const cdnProxy = httpProxy.createProxyServer();
 const bare = createBareServer("/bare/");
 const __dirname = join(fileURLToPath(import.meta.url), "..");
 const app = express();
-const publicPath = "public";
+const staticRoot = process.env.STATIC_DIR || "dist";
+const staticPath = join(__dirname, staticRoot);
+if (!existsSync(staticPath)) {
+  console.warn(
+    `Static directory "${staticRoot}" was not found. Run \`pnpm build\` or set STATIC_DIR to a directory containing built assets.`,
+  );
+}
 
 // --- Express Middleware ---
 app.disable("x-powered-by");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.set("views", join(__dirname, publicPath, "html"));
+app.set("views", staticPath);
 app.use(compression());
 // Serve static assets with improved cache headers
-app.use(express.static(publicPath, {
-  setHeaders: (res, path) => {
-    if (path.match(/\.html$/i)) {
-      // Never cache HTML files
-      res.setHeader('Cache-Control', 'no-store');
-    } else if (path.match(/\.(js|css|png|jpg|jpeg|gif|svg|ico|woff2?|ttf|eot|mp4|webm)$/i)) {
-      // Cache static assets for 7 days
-      res.setHeader('Cache-Control', 'public, max-age=604800, immutable');
-    }
-  }
-}));
+app.use(
+  express.static(staticPath, {
+    setHeaders: (res, path) => {
+      if (path.match(/\.html$/i)) {
+        // Never cache HTML files
+        res.setHeader("Cache-Control", "no-store");
+      } else if (path.match(/\.(js|css|png|jpg|jpeg|gif|svg|ico|woff2?|ttf|eot|mp4|webm)$/i)) {
+        // Cache static assets for 7 days
+        res.setHeader("Cache-Control", "public, max-age=604800, immutable");
+      }
+    },
+  }),
+);
 app.use("/uv/", express.static(uvPath));
 app.use("/scram/", express.static(scramjetPath));
 app.use("/epoxy/", express.static(epoxyPath));
@@ -63,7 +72,7 @@ app.use("/sj/sw.js", (req, res, next) => {
   next();
 });
 app.get("/", (req, res) => {
-  res.sendFile(join(__dirname, publicPath, "html", "index.html"));
+  res.sendFile(join(staticPath, "index.html"));
 });
 app.use("/cdn", (req, res) => {
   cdnProxy.web(req, res, {
@@ -84,16 +93,16 @@ app.get("/api/commit", (req, res) => {
 });
 
 app.get("/settings", (req, res) => {
-  res.sendFile(join(__dirname, publicPath, "html", "settings.html"));
+  res.sendFile(join(staticPath, "settings.html"));
 });
 app.get("/go", (req, res) => {
-  res.sendFile(join(__dirname, publicPath, "html", "go.html"));
+  res.sendFile(join(staticPath, "go.html"));
 });
 app.get("/package.json", (req, res) => {
   res.json(packageJson);
 });
 app.get("*", (req, res) => {
-  res.sendFile(join(__dirname, publicPath, "html", "404.html"));
+  res.sendFile(join(staticPath, "404.html"));
 });
 
 // --- HTTP/Upgrade Handling ---
