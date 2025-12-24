@@ -1,0 +1,9 @@
+node_modules
+.pnpm
+.git
+*.log
+Dockerfile
+fly.toml
+README.md
+LICENSE
+CODE_OF_CONDUCT.md
