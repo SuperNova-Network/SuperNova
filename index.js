@@ -33,10 +33,14 @@ const __dirname = join(fileURLToPath(import.meta.url), "..");
 const app = express();
 const publicPath = "public";
 
+
 // --- Express Middleware ---
 app.disable("x-powered-by");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Serve only the public directory as static assets
+app.use(express.static(join(__dirname, publicPath)));
 
 app.set("views", join(__dirname, publicPath, "html"));
 app.use(compression());
